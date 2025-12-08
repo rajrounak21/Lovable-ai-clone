@@ -82,3 +82,12 @@ This project is a powerful AI development tool capable of planning, architecting
 ## 🛡️ License
 
 This project is open-source and available under the MIT License.
+
+## 💡 Example Prompts
+
+Try these prompts to test the capabilities of the agent:
+
+*   **Todo Web Application**: "Build a beautiful Todo App with dark mode, where I can add, edit, delete, and filter tasks."
+*   **Modern Calculator**: "Create a fully functional Calculator with a glassmorphism UI, supporting basic arithmetic operations."
+*   **BMI Calculator**: "Build a BMI Calculator that takes height and weight inputs, calculates the index, and shows the health category with a colorful gauge."
+
