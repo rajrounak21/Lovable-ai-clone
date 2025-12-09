@@ -10,10 +10,10 @@ from langgraph.prebuilt import create_react_agent
 from app_builder.prompts import *
 from app_builder.states import *
 # Add to imports
+
 from app_builder.tools import (
     write_file, read_file, get_current_directory, list_files,
-    check_code_quality, validate_syntax, analyze_file_issues,
-    start_preview_server, detect_project_type
+    check_code_quality, validate_syntax, analyze_file_issues
 )
 _ = load_dotenv()
 
@@ -159,7 +159,7 @@ Write the full corrected file using write_file(path, content).
                 check_code_quality, validate_syntax, analyze_file_issues
             ]
 
-            fix_agent = create_react_agent(model, tools=reviewer_tools)
+            fix_agent = create_react_agent(llm, tools=reviewer_tools)
 
             try:
                 fix_agent.invoke({
@@ -185,27 +185,21 @@ Write the full corrected file using write_file(path, content).
     return {"reviewer_state": reviewer_state, "review_status": status}
 
 
+import sys
+import subprocess
+
 def preview_agent(state: AppState) -> dict:
     """Starts a live preview server for the generated project."""
     print("\n=== STARTING LIVE PREVIEW ===")
     
-    # Detect project type
     try:
-        project_type = detect_project_type.invoke({})
-        print(f"Detected project type: {project_type}")
-        
-        # Start preview server
-        preview_url = start_preview_server.invoke({"project_type": project_type})
-        print(preview_url)
-        print("\n✓ Live preview is running!")
-        print("The browser should open automatically.")
-        print("Note: The server runs in the background. Close the terminal to stop it.\n")
+        # Run preview.py as a separate process
+        script_path = "app_builder/preview.py"
+        print(f"Executing {script_path}...")
+        subprocess.Popen([sys.executable, script_path])
+        print("\n✓ Live preview started in background.")
     except Exception as e:
-        print(f"Error starting preview server: {e}")
-        print("You can manually start a server:")
-        print("  For HTML: python -m http.server 8000")
-        print("  For Python Flask: cd generated_project && python app.py")
-        print("  For Node: cd generated_project && npm start")
+        print(f"Error starting preview: {e}")
     
     return {"preview_status": "STARTED"}
 
@@ -235,6 +229,6 @@ graph.add_edge("preview", END)
 graph.set_entry_point("planner")
 agent = graph.compile()
 if __name__ == "__main__":
-    result = agent.invoke({"user_prompt": "Build a simple  modern calculator app in html css and js"},
+    result = agent.invoke({"user_prompt": "Build a beautiful ui  to-do web application  with HTML, CSS, JS "},
                           config={"recursion_limit": 50})
     print("Final State:", result)
