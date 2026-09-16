@@ -8,3 +8,6 @@ pydantic
 langchain-openai
 openai
 langchain-community
+fastapi
+uvicorn
+jinja2
