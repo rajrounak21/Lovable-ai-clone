@@ -1,4 +1,4 @@
-# Lovable-ai Clone
+# Lovable-ai (Clone)
 
 **An Autonomous Multi-Agent AI Web Architect**
 
