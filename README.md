@@ -59,7 +59,7 @@ This project is a powerful AI development tool capable of planning, architecting
 3.  **Set up Environment**:
     Create a `.env` file in the root:
     ```env
-    OPENAI_API_KEY=your_key_here
+        OPENAI_API_KEY=replace-with-your_key_here
     GROQ_API_KEY=your_key_here
     ```
 
