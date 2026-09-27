@@ -83,7 +83,7 @@ GROQ_API_KEY=replace-your_key_here
 
 This project is open-source and available under the MIT License.
 
-## 💡 Example Prompts
+##  Example Prompts
 
 Try these prompts to test the capabilities of the agent:
 
